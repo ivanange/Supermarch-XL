@@ -1,0 +1,4 @@
+ {
+		Article(nlohmann::json info);
+		
+	}

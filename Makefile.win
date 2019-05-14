@@ -1,0 +1,61 @@
+# Project: Supermarché XL
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+OBJ      = Classes/Date.o Classes/XL.o Classes/Database/ArticleDB.o Classes/Database/ClientDB.o Classes/Database/CommandDB.o Classes/Database/Database.o Classes/Database/LivraisonDB.o Classes/Entities/Article.o Classes/Entities/Client.o Classes/Entities/Command.o Classes/Entities/Livraison.o maintest.o
+LINKOBJ  = Classes/Date.o Classes/XL.o Classes/Database/ArticleDB.o Classes/Database/ClientDB.o Classes/Database/CommandDB.o Classes/Database/Database.o Classes/Database/LivraisonDB.o Classes/Entities/Article.o Classes/Entities/Client.o Classes/Entities/Command.o Classes/Entities/Livraison.o maintest.o
+LIBS     = -L"Z:/programmes/Dev-Cpp/MinGW64/lib" -L"Z:/programmes/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -std=c++11
+INCS     = -I"Z:/programmes/Dev-Cpp/MinGW64/include" -I"Z:/programmes/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"Z:/programmes/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
+CXXINCS  = -I"Z:/programmes/Dev-Cpp/MinGW64/include" -I"Z:/programmes/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"Z:/programmes/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"Z:/programmes/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
+BIN      = "Supermarché XL.exe"
+CXXFLAGS = $(CXXINCS) -std=c++11
+CFLAGS   = $(INCS) 
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+Classes/Date.o: Classes/Date.cpp
+	$(CPP) -c Classes/Date.cpp -o Classes/Date.o $(CXXFLAGS)
+
+Classes/XL.o: Classes/XL.cpp
+	$(CPP) -c Classes/XL.cpp -o Classes/XL.o $(CXXFLAGS)
+
+Classes/Database/ArticleDB.o: Classes/Database/ArticleDB.cpp
+	$(CPP) -c Classes/Database/ArticleDB.cpp -o Classes/Database/ArticleDB.o $(CXXFLAGS)
+
+Classes/Database/ClientDB.o: Classes/Database/ClientDB.cpp
+	$(CPP) -c Classes/Database/ClientDB.cpp -o Classes/Database/ClientDB.o $(CXXFLAGS)
+
+Classes/Database/CommandDB.o: Classes/Database/CommandDB.cpp
+	$(CPP) -c Classes/Database/CommandDB.cpp -o Classes/Database/CommandDB.o $(CXXFLAGS)
+
+Classes/Database/Database.o: Classes/Database/Database.cpp
+	$(CPP) -c Classes/Database/Database.cpp -o Classes/Database/Database.o $(CXXFLAGS)
+
+Classes/Database/LivraisonDB.o: Classes/Database/LivraisonDB.cpp
+	$(CPP) -c Classes/Database/LivraisonDB.cpp -o Classes/Database/LivraisonDB.o $(CXXFLAGS)
+
+Classes/Entities/Article.o: Classes/Entities/Article.cpp
+	$(CPP) -c Classes/Entities/Article.cpp -o Classes/Entities/Article.o $(CXXFLAGS)
+
+Classes/Entities/Client.o: Classes/Entities/Client.cpp
+	$(CPP) -c Classes/Entities/Client.cpp -o Classes/Entities/Client.o $(CXXFLAGS)
+
+Classes/Entities/Command.o: Classes/Entities/Command.cpp
+	$(CPP) -c Classes/Entities/Command.cpp -o Classes/Entities/Command.o $(CXXFLAGS)
+
+Classes/Entities/Livraison.o: Classes/Entities/Livraison.cpp
+	$(CPP) -c Classes/Entities/Livraison.cpp -o Classes/Entities/Livraison.o $(CXXFLAGS)
+
+maintest.o: maintest.cpp
+	$(CPP) -c maintest.cpp -o maintest.o $(CXXFLAGS)
