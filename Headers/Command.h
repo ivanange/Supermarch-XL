@@ -36,6 +36,8 @@ class Command {
 
 };
 
+void to_json(nlohmann::json &j,  const Command &commande );
+void from_json(const nlohmann::json &j, Command &commande);
 typedef std::vector<Command>::iterator CommandIt ; // Command Iterator
 
 #endif

@@ -32,6 +32,8 @@ class Livraison {
 
 };
 
+void to_json(nlohmann::json &j,  const Livraison &livraison );
+void from_json(const nlohmann::json &j, Livraison &livraison);
 typedef std::vector<Livraison>::iterator LivraisonIt ; // Livraison Iterator
 
 #endif

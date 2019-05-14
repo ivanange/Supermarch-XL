@@ -54,6 +54,8 @@ class Client {
 
 };
 
+void to_json(nlohmann::json &j,  const Client &client );
+void from_json(const nlohmann::json &j, Client &client);
 typedef std::vector<Client>::iterator ClientIt ; // Client Iterator
 
 #endif

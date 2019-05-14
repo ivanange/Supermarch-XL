@@ -48,5 +48,8 @@ class Article {
 
 };
 
+void to_json(nlohmann::json &j,  const Article &article );
+void from_json(const nlohmann::json &j, Article &article);
 typedef std::vector<Article>::iterator ArticleIt ; // Article Iterator
+
 #endif

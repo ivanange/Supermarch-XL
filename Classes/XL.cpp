@@ -16,18 +16,17 @@ using json = nlohmann::json;
 		LivraisonDB Livraisons("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");
 	}
 	vector<Article> XL::getArticles() {
-		return Articles.findAll()[0].get<Article>();
+		return Articles.findAll().get<vector<Article>>();
 	}
 	vector<Article> XL::getCriticalArticles() {
-		std::function<bool(json)> filter = [_numero](const json object) -> bool {  return ( object["quantite"] <= object["seuil"] ); }
+		std::function<bool(json)> filter = [](const json object) -> bool {  return ( object["quantite"] <= object["seuil"] ); };
 		return Articles.findIf(filter).get<vector<Article>>();
-		_quantite, _seuil;
 	}
 	Client XL::getBestClient( const Article &article) {
 		std::map<int, int> results;
 		json commandes = Commands.findBY("refArticle", article.ref() );
 		for( JSONIt it = commandes.begin(); it != commandes.end(); it++ ) {
-			results[*it["numClient"].get<int>()] += *it["quantite"].get<int>();
+			results[(*it)["numClient"].get<int>()] += (*it)["quantite"].get<int>();
 		} 
 		int max = std::max_element(results.begin(), results.end(), [] (const std::pair<int,int>& a, const std::pair<int,int>& b)->bool{ return a.second < b.second; } )->first;			
 		return Clients.find(max).get<Client>();
@@ -36,9 +35,9 @@ using json = nlohmann::json;
 		float capital = 0;
 		json articles = Articles.findAll();
 		for( JSONIt it = articles.begin(); it != articles.end(); it++ ) {
-			sum += ( *it["quantite"].get<int>() * (*it["prix"].get<float>()) );
+			capital += ( (*it)["quantite"].get<int>() * ((*it)["prix"].get<float>()) );
 		}
-		return sum;	
+		return capital;	
 	}
 	/*
 	void saveClient(json info);

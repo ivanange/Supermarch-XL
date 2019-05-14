@@ -64,7 +64,7 @@ vector<Article> Client::getArticles(nlohmann::json &JSON) {
 }
 
 vector<Command> Client::getOngoingCommands() {
-	std::function<bool(json)> filter = [_numero](const json object) -> bool {  return ( object["numClient"] == _numero return  && object["etat"] == "en cours"); }
+	std::function<bool(json)> filter = [_numero](const json object) -> bool {  return ( object["numClient"] == _numero return  && object["etat"] == "en cours"); };
 	return _commandes->findIf(filter).get<vector<Command>>();	
 }
 
