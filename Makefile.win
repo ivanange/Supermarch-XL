@@ -9,7 +9,7 @@ LINKOBJ  = Classes/Date.o Classes/XL.o Classes/Database/ArticleDB.o Classes/Data
 LIBS     = -L"Z:/programmes/Dev-Cpp/MinGW64/lib" -L"Z:/programmes/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -std=c++11
 INCS     = -I"Z:/programmes/Dev-Cpp/MinGW64/include" -I"Z:/programmes/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"Z:/programmes/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include"
 CXXINCS  = -I"Z:/programmes/Dev-Cpp/MinGW64/include" -I"Z:/programmes/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"Z:/programmes/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"Z:/programmes/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++"
-BIN      = "Supermarché XL.exe"
+BIN      = XL.exe
 CXXFLAGS = $(CXXINCS) -std=c++11
 CFLAGS   = $(INCS) 
 RM       = rm.exe -f

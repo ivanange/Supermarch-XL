@@ -24,8 +24,7 @@ class Command {
 	void refArticle(int refArticle);
 	unsigned quantite() const;
 	void quantite( int quantite);
-	void fromJson( const nlohmann::json &JSON);
-	void toJson(nlohmann::json &JSON);
+	void toJson(nlohmann::json &JSON) const;
 		
 	
 	private:

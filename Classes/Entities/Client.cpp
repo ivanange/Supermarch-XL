@@ -1,10 +1,10 @@
 #include "../../Headers/Client.h"
-/*
+
 #include "../../Headers/Article.h"
 #include "../../Headers/Command.h"
 #include "../../Headers/ArticleDB.h"
 #include "../../Headers/CommandDB.h"
-*/
+
 
 using namespace std;
 using json = nlohmann::json;
@@ -29,7 +29,7 @@ string Client::nom() const {
 	return _nom;
 }
 
-void Client::nom(std:string nom) {
+void Client::nom(std::string nom) {
 	_nom = nom ;
 }
 
@@ -37,7 +37,7 @@ string Client::prenom() const {
 	return _prenom;
 }
 
-void Client::prenom( std:string prenom) {
+void Client::prenom( std::string prenom) {
 	_prenom = prenom;
 }
 
@@ -53,22 +53,23 @@ void Client::genre( gender genre) {
 	_genre = genre;
 }
 
-vector<Article> Client::getArticles(nlohmann::json &JSON) {
+vector<Article> Client::getArticles() {
 	vector<Article> articles;
 	json result = _commandes->findBY("numClient", _numero);
 	for( JSONIt it = result.begin(); it!= result.end(); it++ ) {
-		articles.push_back( _articles->find( *it["ref"]).get<Article>() );
+		articles.push_back( _articles->find( (*it)["ref"]).get<Article>() );
 	}
 	return articles;	
 	
 }
 
 vector<Command> Client::getOngoingCommands() {
-	std::function<bool(json)> filter = [_numero](const json object) -> bool {  return ( object["numClient"] == _numero return  && object["etat"] == "en cours"); };
+	unsigned id = _numero;
+	std::function<bool(json)> filter = [id](const json object) -> bool {  return ( object["numClient"] == id  && object["etat"] == "en cours"); };
 	return _commandes->findIf(filter).get<vector<Command>>();	
 }
 
-void Client::toJson(nlohmann::json &JSON) {
+void Client::toJson(nlohmann::json &JSON) const {
 	JSON = { {"numero", _numero},
 	{"nom", _nom},
 	{"prenom", _prenom},
@@ -84,7 +85,7 @@ void Client::_init(nlohmann::json info) {
 	_dateDeNaissance  = Date( info["dateDeNaissance"].get<std::string>() );
 	_genre = info["genre"].get<std::string>()=="M"? M:F;
 	}
-	catch() {
+	catch(...) {
 		throw("Invalid property value");
 	}
 	

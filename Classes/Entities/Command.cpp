@@ -22,7 +22,7 @@ void Command::numClient(int numClient) {
 }
 	
 state Command::etat() const {
-	return etat;
+	return _etat;
 	
 }
 	
@@ -31,7 +31,7 @@ void Command::etat( state etat) {
 }
 	
 unsigned Command::refArticle() const {
-	return refArticle;
+	return _refArticle;
 }
 	
 void Command::refArticle(int refArticle) {
@@ -39,7 +39,7 @@ void Command::refArticle(int refArticle) {
 }
 
 unsigned Command::quantite() const {
-	return quantite;
+	return _quantite;
 	
 }
 	
@@ -53,16 +53,15 @@ void Command::_init(nlohmann::json info) {
 	_refArticle  = (unsigned)info["refArticle"].get<int>();
 	_numClient  = (unsigned)info["numClient"].get<int>();
 	_quantite  = (unsigned)info["quantite"].get<int>();
-	_nom  = info["nom"].get<std::string>();
 	_etat = info["etat"].get<std::string>()=="livrer" ? livrer:en_cours;
 	}
-	catch() {
+	catch(...) {
 		throw("Invalid property value");
 	}
 	
 }
 
-void Command::toJson(nlohmann::json &JSON) {
+void Command::toJson(nlohmann::json &JSON) const {
 	JSON = { {"numCommand", _numCommand},
 	{"numClient", _numClient},
 	{"refArticle", _refArticle},
@@ -76,7 +75,7 @@ void to_json(json &j,  const Command &commande ) {
 }
 
 void from_json(const json &j, Command &commande) {
-	commande = Client(j);
+	commande = Command(j);
 }
 
 	

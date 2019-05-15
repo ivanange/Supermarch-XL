@@ -9,11 +9,10 @@
 #include "json.hpp"
 #include "utility.h"
 
-/*
+
 class Command;
 class ArticleDB;
 class CommandDB;
-*/
 class Article;
 
 
@@ -38,8 +37,7 @@ class Client {
 	void genre( gender genre);
 	std::vector<Article> getArticles();
 	std::vector<Command> getOngoingCommands();
-	void fromJson( const nlohmann::json &JSON);
-	void toJson(nlohmann::json &JSON);
+	void toJson(nlohmann::json &JSON) const;
 	
 	
 	private:

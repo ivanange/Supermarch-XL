@@ -13,19 +13,21 @@
 class Database {
 	
 	private:
-		std::string _nom, _fichier, _cle;
 		std::ofstream _stream;
-		nlohmann::json _JSON;
-		nlohmann::json* findref(unsigned id) const;
+		JSONIt findref(std::string key, std::string value);
+		JSONIt findref(std::string key, unsigned value);
 
 	public:
+		nlohmann::json _JSON;
+		std::string _nom, _fichier, _cle;
+		Database();
 		Database(std::string nom, std::string fichier, std::string cle );
-		nlohmann::json find(unsigned id) const;
+		nlohmann::json find(unsigned id) ;
 		void update(unsigned id, nlohmann::json info );
-		nlohmann::json findBY(std::string key, std::string value) const;
-		nlohmann::json findBY(std::string key, unsigned value) const;
+		nlohmann::json findBY(std::string key, std::string value) ;
+		nlohmann::json findBY(std::string key, unsigned value);
 		nlohmann::json findAll() const;
-		nlohmann::json findIf( std::function<bool(nlohmann::json)>filter) const;
+		nlohmann::json findIf( std::function<bool(nlohmann::json)>filter) ;
 		void save();
 		
 	

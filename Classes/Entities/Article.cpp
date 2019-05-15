@@ -9,11 +9,11 @@ using json = nlohmann::json;
 Article::Article(){}
 
 Article::Article(nlohmann::json info) {	
-	init(info); 
+	_init(info); 
 }
 
-Article::Article(nlohmann::json info, CLientDB* clients, CommandDB* commandes ) {
-	init(info);
+Article::Article(nlohmann::json info, ClientDB* clients, CommandDB* commandes ) {
+	_init(info);
 	_clients = clients;
 	_commandes = commandes;
 }
@@ -26,7 +26,7 @@ std::string Article::label() const {
 	return _label;
 }
 
-void Article::label( std:string label) { 
+void Article::label( std::string label) { 
 	_label = label; 
 }
 
@@ -39,7 +39,7 @@ void Article::prix( float prix) {
 }
 
 unsigned Article::quantite() const { 
-	return prix; 
+	return _prix; 
 }
 
 void Article::quantite( int quantite) {
@@ -59,13 +59,13 @@ vector<Client> Article::getClients() {
 	vector<Client> clients;
 	json result = _commandes->findBY("refArticle", _ref);
 	for( JSONIt it = result.begin(); it!= result.end(); it++ ) {
-		clients.push_back( _clients->find( *it["numero"]).get<Client>() );
+		clients.push_back( _clients->find( (*it)["numero"]).get<Client>() );
 	}
 	return clients;
 	
 }
 
-void Article::toJson(nlohmann::json &JSON) {
+void Article::toJson(nlohmann::json &JSON) const {
 	JSON = { {"ref", _ref},
 	{"quantite", _quantite},
 	{"seuil", _seuil},
@@ -82,7 +82,7 @@ void Article::_init(nlohmann::json info) {
 	_label  = info["label"].get<std::string>();
 	_prix = info["prix"].get<float>();
 	}
-	catch{
+	catch(...){
 		throw("Invalid property value");
 	}
 }

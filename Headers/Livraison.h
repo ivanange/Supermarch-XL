@@ -20,8 +20,7 @@ class Livraison {
 	void quantite( int quantite);
 	unsigned numClient() const;
 	void numClient(int numClient);
-	void fromJson( const nlohmann::json &JSON);
-	void toJson(nlohmann::json &JSON);
+	void toJson(nlohmann::json &JSON) const;
 
 		
 	

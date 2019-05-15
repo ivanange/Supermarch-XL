@@ -15,7 +15,7 @@ unsigned Livraison::ref() const {
 }
 	
 unsigned Livraison::numCommand() const {
-	return _numCommand
+	return _numCommand;
 }
 	
 void Livraison::numCommand(int numCommand) {
@@ -23,7 +23,7 @@ void Livraison::numCommand(int numCommand) {
 }
 	
 unsigned Livraison::quantite() const {
-	return quantite;
+	return _quantite;
 }
 
 void Livraison::quantite( int quantite) {
@@ -38,7 +38,7 @@ void Livraison::numClient(int numClient) {
 	_numClient = numClient;
 }
 
-void Livraison::toJson(nlohmann::json &JSON) {
+void Livraison::toJson(nlohmann::json &JSON) const {
 	JSON = { {"ref", _ref},
 	{"numCommand", _numCommand},
 	{"quantite", _quantite},
@@ -54,7 +54,7 @@ void Livraison::_init(nlohmann::json info) {
 		_numClient  = (unsigned)info["numClient"].get<int>();
 		_quantite  = (unsigned)info["quantite"].get<int>();
 	}
-	catch() {
+	catch(...) {
 		throw("Invalid property value");
 	}		
 }

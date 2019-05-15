@@ -8,11 +8,11 @@
 #include "json.hpp"
 #include "utility.h"
 
-/*
+
 class Client;
 class CommandDB;
 class ClientDB;
-*/
+
 
 
 class Article {
@@ -32,8 +32,7 @@ class Article {
 	unsigned seuil() const;
 	void seuil( int seuil);
 	std::vector<Client> getClients();
-	void fromJson( const nlohmann::json &JSON);
-	void toJson(nlohmann::json &JSON);
+	void toJson(nlohmann::json &JSON) const;
 	
 	
 	private:
