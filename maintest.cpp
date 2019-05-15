@@ -7,10 +7,24 @@ using json = nlohmann::json;
 
 
 int main() {
-	int n;
-	Client client;
-	cout<<client.nom();
-	cin>>n;
+
+	try {
+		
+		
+		
+		XL marche;
+		json j = marche.Clients._JSON;
+		Date date("05/04/2000");
+		Client client( { { "numero", 3}, { "nom", "Bouh"}, {"prenom", "Ivan"}, {"dateDeNaissance", "05/04/2000"}, {"genre", "M"}});
+		cout<<client.nom()<<"\t"<<date.toString()<<"\t"<<j;
+		
+		
+		
+	}
+	catch(char const* const& err) {
+		string error = err;
+		cout<<error;
+	}
 	
 	
 }

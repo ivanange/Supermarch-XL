@@ -16,6 +16,7 @@ class Database {
 		std::ofstream _stream;
 		JSONIt findref(std::string key, std::string value);
 		JSONIt findref(std::string key, unsigned value);
+		bool _isEmpty() const;
 
 	public:
 		nlohmann::json _JSON;
@@ -29,6 +30,7 @@ class Database {
 		nlohmann::json findAll() const;
 		nlohmann::json findIf( std::function<bool(nlohmann::json)>filter) ;
 		void save();
+		void reset();
 		
 	
 	

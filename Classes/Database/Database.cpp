@@ -8,6 +8,7 @@ Database::Database(std::string nom, std::string fichier, std::string cle ) {
 	_nom = nom;
 	_fichier = fichier;
 	_cle = cle;
+	if(_isEmpty()){ reset();}
 	std::ifstream flux(_fichier.c_str());
 	if(flux) {
 		flux>>_JSON;
@@ -81,6 +82,18 @@ void Database::save() {
 	_stream.open(_fichier.c_str());
 }
 
+void Database::reset() {
+	string empty = "{ \"";
+	empty += (_nom + "\":[], \"index\":0}");
+	_stream<<empty;
+
+}
+
+bool Database::_isEmpty() const {
+	ifstream file(_fichier.c_str());
+	string test;
+	return (file>>test) ? true : false;
+}
 
 
 

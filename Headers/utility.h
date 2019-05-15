@@ -5,7 +5,7 @@
 
 typedef nlohmann::json::iterator JSONIt ; // Livraison Iterator
 
-const std::string  DB_DIRECTORY = "./Classes/Database/files";
+const std::string  DB_DIRECTORY = "Classes/Database/files/";
 
 
 
