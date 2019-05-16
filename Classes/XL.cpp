@@ -10,12 +10,13 @@ using json = nlohmann::json;
 
 
 	XL::XL() {
+		Database db("Articles", DB_DIRECTORY  +"Articles", "ref");/*
 		ArticleDB Articles("Articles", DB_DIRECTORY  +"Articles", "ref");
 		ClientDB Clients("Clients", DB_DIRECTORY  +"Clients", "numero");
 		CommandDB Commands("Commands", DB_DIRECTORY  +"Commands", "numCommand");
-		LivraisonDB Livraisons("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");
+		LivraisonDB Livraisons("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");*/
 	}
-	vector<Article> XL::getArticles() {
+	vector<Article> XL::getArticles() { 
 		return Articles.findAll().get<vector<Article>>();
 	}
 	vector<Article> XL::getCriticalArticles() {

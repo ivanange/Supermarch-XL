@@ -12,6 +12,10 @@
 
 class Database {
 	
+	protected:
+		nlohmann::json  _JSON;
+		std::string _nom, _fichier, _cle;
+		
 	private:
 		std::ofstream _stream;
 		JSONIt findref(std::string key, std::string value);
@@ -19,8 +23,6 @@ class Database {
 		bool _isEmpty() const;
 
 	public:
-		nlohmann::json _JSON;
-		std::string _nom, _fichier, _cle;
 		Database();
 		Database(std::string nom, std::string fichier, std::string cle );
 		nlohmann::json find(unsigned id) ;
@@ -30,9 +32,7 @@ class Database {
 		nlohmann::json findAll() const;
 		nlohmann::json findIf( std::function<bool(nlohmann::json)>filter) ;
 		void save();
-		void reset();
 		
-	
 	
 };
 

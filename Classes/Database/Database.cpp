@@ -1,5 +1,7 @@
 #include "../../Headers/Database.h"
 
+#include<iostream>
+
 using namespace std;
 using json = nlohmann::json;
 
@@ -8,17 +10,28 @@ Database::Database(std::string nom, std::string fichier, std::string cle ) {
 	_nom = nom;
 	_fichier = fichier;
 	_cle = cle;
-	if(_isEmpty()){ reset();}
-	std::ifstream flux(_fichier.c_str());
-	if(flux) {
-		flux>>_JSON;
+	
+	
+	
+	if(_isEmpty()){ 
+		vector<json> v;
+		_JSON = {	{_nom, v },  {"index", 0} }; 
 	}
 	else {
-		throw ("Cannot open file");
+		std::ifstream flux(_fichier.c_str());
+		if(flux) {
+			flux>>_JSON;
+			flux.close();
+
+		}
+		else {
+			throw ("Cannot open file");
+		}
 	}
 	
 	std::ofstream stream(_fichier.c_str());
-	if( !(stream)) { throw ("Could not write to file");	}
+	if( !(stream)) { throw ("Could not write to file");	} 
+	
 	
 }
 
@@ -38,6 +51,7 @@ JSONIt Database::findref(std::string key, unsigned value)  {
 
 
 nlohmann::json Database::find(unsigned id)  {
+	cout<<_JSON;
 	return *(findref(_cle, id));
 }
 
@@ -82,17 +96,14 @@ void Database::save() {
 	_stream.open(_fichier.c_str());
 }
 
-void Database::reset() {
-	string empty = "{ \"";
-	empty += (_nom + "\":[], \"index\":0}");
-	_stream<<empty;
-
-}
 
 bool Database::_isEmpty() const {
 	ifstream file(_fichier.c_str());
 	string test;
-	return (file>>test) ? true : false;
+    file.seekg(0,ios::end);
+    size_t size = file.tellg();
+    file.close();
+    return size==0 ? true : false;
 }
 
 

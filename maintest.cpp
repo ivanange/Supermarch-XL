@@ -10,13 +10,10 @@ int main() {
 
 	try {
 		
-		
-		
 		XL marche;
-		json j = marche.Clients._JSON;
-		Date date("05/04/2000");
-		Client client( { { "numero", 3}, { "nom", "Bouh"}, {"prenom", "Ivan"}, {"dateDeNaissance", "05/04/2000"}, {"genre", "M"}});
-		cout<<client.nom()<<"\t"<<date.toString()<<"\t"<<j;
+		//marche.Clients.add({  { "nom", "Bouh"}, {"prenom", "Ivan"}, {"dateDeNaissance", "05/04/2000"}, {"genre", "M"} } );
+		marche.db.findBY("ref", 5);
+
 		
 		
 		

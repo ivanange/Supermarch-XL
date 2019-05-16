@@ -58,6 +58,7 @@ class XL {
 	ClientDB  Clients;
 	CommandDB Commands;
 	LivraisonDB Livraisons;
+	Database db;
 	
 	
 	

@@ -2,18 +2,16 @@
 
 #include "../../Headers/Client.h"
 
+#include<iostream>
+
 using namespace std;
 using json = nlohmann::json;
 
 ClientDB::ClientDB(){}
-ClientDB::ClientDB(std::string nom, std::string fichier, std::string cle ):Database(nom, fichier, cle) {}
+ClientDB::ClientDB(std::string nom, std::string fichier, std::string cle ) : Database(nom, fichier, cle) {  }
 
 void ClientDB::add(nlohmann::json info ) {
-	info["numero"] = _JSON["index"].get<int>();
-	_JSON["index"] = _JSON["index"].get<int>() +1;
-	Client clients = Client(info);
-	_JSON[_nom].push_back(clients);
-	save();
+	cout<<"_JSON : "<<(Database::_nom)<<endl;
 }
 
 void ClientDB::remove(unsigned id) {
