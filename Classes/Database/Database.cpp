@@ -1,6 +1,5 @@
 #include "../../Headers/Database.h"
 
-#include<iostream>
 
 using namespace std;
 using json = nlohmann::json;
@@ -29,6 +28,10 @@ nlohmann::json Database::find(unsigned id)  {
 	return *(findref(_cle, id));
 }
 
+nlohmann::json Database::find(std::string id)  {
+	return *(findref(_cle, stoi(id) ));
+}
+
 void Database::update(unsigned id, nlohmann::json info ) {
 	JSONIt target = findref(_cle, id);
 
@@ -39,17 +42,19 @@ void Database::update(unsigned id, nlohmann::json info ) {
 }
 
 nlohmann::json Database::findBY(std::string key, std::string value)  {
-	json result = {};
+	json result;
 	for( JSONIt it = _JSON[_nom].begin(); it!=_JSON[_nom].end(); it++ ) {
 		if( (*it)[key] == value) { result.push_back(*it); }
 	}
+	return result;
 }
 
 nlohmann::json Database::findBY(std::string key, unsigned value)  {
-	json result = {};
+	json result;
 	for( JSONIt it = (_JSON[_nom]).begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] == value) { result.push_back(*it); }
-	}	
+		if( (*it)[key].get<unsigned>() == value) { result.push_back(*it); }
+	}
+	return result;	
 }
 
 nlohmann::json Database::findAll() const {

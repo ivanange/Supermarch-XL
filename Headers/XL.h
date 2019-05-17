@@ -33,6 +33,7 @@ class XL {
 	std::vector<Article> getArticles();
 	std::vector<Article> getCriticalArticles();
 	Client getBestClient( const Article &article);
+	Client getBestClient( unsigned ref);
 	float capital();
 	
 	/*

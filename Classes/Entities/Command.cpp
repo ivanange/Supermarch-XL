@@ -53,10 +53,10 @@ void Command::_init(nlohmann::json info) {
 	_refArticle  = (unsigned)info["refArticle"].get<unsigned>();
 	_numClient  = (unsigned)info["numClient"].get<unsigned>();
 	_quantite  = (unsigned)info["quantite"].get<unsigned>();
-	_etat = info["etat"].get<std::string>()=="livrer" ? livrer:en_cours;
+	_etat = (info["etat"].get<std::string>() == "livrer" )? livrer:en_cours;
 	}
 	catch(...) {
-		throw("Invalid property value");
+		throw("Invalid  or Missing  property  value for Command");
 	}
 	
 }

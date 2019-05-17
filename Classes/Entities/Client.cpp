@@ -4,6 +4,7 @@
 #include "../../Headers/Command.h"
 #include "../../Headers/ArticleDB.h"
 #include "../../Headers/CommandDB.h"
+#include<iostream>
 
 
 using namespace std;
@@ -57,7 +58,7 @@ vector<Article> Client::getArticles() {
 	vector<Article> articles;
 	json result = _commandes->findBY("numClient", _numero);
 	for( JSONIt it = result.begin(); it!= result.end(); it++ ) {
-		articles.push_back( _articles->find( (*it)["ref"]).get<Article>() );
+		articles.push_back( _articles->find( (unsigned)(*it)["refArticle"] ).get<Article>() );
 	}
 	return articles;	
 	
@@ -83,10 +84,13 @@ void Client::_init(nlohmann::json info) {
 	_nom  = info["nom"].get<std::string>();
 	_prenom  =  info["prenom"].get<std::string>();
 	_dateDeNaissance  = Date( info["dateDeNaissance"].get<std::string>() );
-	_genre = info["genre"].get<std::string>()=="M"? M:F;
+	_genre = (info["genre"].get<std::string>() =="M" )? M:F;
+	}
+	catch(char const* const& err) {
+		throw err;
 	}
 	catch(...) {
-		throw("Invalid property value");
+		throw("Invalid  or Missing  property  value for Client");
 	}
 	
 }

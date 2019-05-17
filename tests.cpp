@@ -1,6 +1,7 @@
 #include "../json.hpp"
 #include<iostream>
 #include<string>
+#include<map>
 
 using  json = nlohmann::json;
 using namespace std;
@@ -22,6 +23,15 @@ class testeur : public tete {
 
 int main() {
 
+	map<string, int> dico;
+	dico["a"] = 1;
+	dico["b"] = 2;
+	json dic;
+	dic["mondico"] =dico;
+	dic["mondico"].erase("a");
+	dic["mondico"].erase("b");
+	cout<<(dic["mondico"].empty());
+	cout<<dic<<endl;
 	testeur T;
 	cout<<T.f<<T.g;
 	
@@ -36,7 +46,7 @@ int main() {
 	cout<<j1<<"\n";
 	
 for (json::iterator it = j1["j2"].begin(); it != j1["j2"].end(); ++it) {
-  std::cout << *it << '\n';
+  std::cout<<1 << *it << '\n';
 }
 
 	

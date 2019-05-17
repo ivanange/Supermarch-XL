@@ -59,7 +59,7 @@ vector<Client> Article::getClients() {
 	vector<Client> clients;
 	json result = _commandes->findBY("refArticle", _ref);
 	for( JSONIt it = result.begin(); it!= result.end(); it++ ) {
-		clients.push_back( _clients->find( (*it)["numero"]).get<Client>() );
+		clients.push_back( _clients->find( (unsigned)(*it)["numClient"]).get<Client>() );
 	}
 	return clients;
 	
@@ -83,7 +83,7 @@ void Article::_init(nlohmann::json info) {
 	_prix = info["prix"].get<float>();
 	}
 	catch(...){
-		throw("Invalid property value");
+		throw("Invalid  or Missing  property  value for Article");
 	}
 }
 
