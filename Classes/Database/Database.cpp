@@ -13,13 +13,13 @@ Database::Database(std::string nom, std::string fichier, std::string cle ) {
 
 JSONIt Database::findref(std::string key, std::string value)  {
 	for( JSONIt it = _JSON[_nom].begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] = value) { return it; }
+		if( (*it)[key] == value) { return it; }
 	}	
 }
 
 JSONIt Database::findref(std::string key, unsigned value)  {
 	for( JSONIt it = _JSON[_nom].begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] = value) { return it; }
+		if( (*it)[key] == value) { return it; }
 	}	
 }
 
@@ -41,14 +41,14 @@ void Database::update(unsigned id, nlohmann::json info ) {
 nlohmann::json Database::findBY(std::string key, std::string value)  {
 	json result = {};
 	for( JSONIt it = _JSON[_nom].begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] = value) { result.push_back(*it); }
+		if( (*it)[key] == value) { result.push_back(*it); }
 	}
 }
 
 nlohmann::json Database::findBY(std::string key, unsigned value)  {
 	json result = {};
 	for( JSONIt it = (_JSON[_nom]).begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] = value) { result.push_back(*it); }
+		if( (*it)[key] == value) { result.push_back(*it); }
 	}	
 }
 

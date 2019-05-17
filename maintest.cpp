@@ -12,7 +12,9 @@ int main() {
 		
 		XL marche;
 		marche.Clients.add({  { "nom", "Bouh"}, {"prenom", "Ivan"}, {"dateDeNaissance", "05/04/2000"}, {"genre", "M"} } );
-		Clients.find(5);
+		Client client = marche.Clients.find(0).get<Client>();
+		//json test = client;
+		//cout<<test;
 
 		
 		
