@@ -11,8 +11,8 @@ int main() {
 	try {
 		
 		XL marche;
-		//marche.Clients.add({  { "nom", "Bouh"}, {"prenom", "Ivan"}, {"dateDeNaissance", "05/04/2000"}, {"genre", "M"} } );
-		marche.db.findBY("ref", 5);
+		marche.Clients.add({  { "nom", "Bouh"}, {"prenom", "Ivan"}, {"dateDeNaissance", "05/04/2000"}, {"genre", "M"} } );
+		Clients.find(5);
 
 		
 		

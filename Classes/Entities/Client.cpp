@@ -79,7 +79,7 @@ void Client::toJson(nlohmann::json &JSON) const {
 }
 void Client::_init(nlohmann::json info) {
 	try {
-	_numero  = (unsigned)info["numero"].get<int>() ;
+	_numero  = (unsigned)info["numero"].get<unsigned>() ;
 	_nom  = info["nom"].get<std::string>();
 	_prenom  =  info["prenom"].get<std::string>();
 	_dateDeNaissance  = Date( info["dateDeNaissance"].get<std::string>() );

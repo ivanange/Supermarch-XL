@@ -30,7 +30,7 @@ int main() {
 	
 	json j1 = { {"name", 1}, { "j2", 2} };
 	json j2 = { {"name2", 5}, { "j2", 8} };
-	int n = j1["name"].get<unsigned>();
+	unsigned n = j1["name"].get<unsigned>();
 	std::cout<<j1<<"\n";
 	j1["j2"] = j2;
 	cout<<j1<<"\n";

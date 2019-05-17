@@ -1,20 +1,14 @@
 #include "../Headers/XL.h"
-/*
-#include "../Headers/Client.h"
-#include "../Headers/Article.h"
-#include "../Headers/Command.h"
-#include "../Headers/Livraison.h"
-*/
+
 using namespace std;
 using json = nlohmann::json;
-
+ 
 
 	XL::XL() {
-		Database db("Articles", DB_DIRECTORY  +"Articles", "ref");/*
-		ArticleDB Articles("Articles", DB_DIRECTORY  +"Articles", "ref");
-		ClientDB Clients("Clients", DB_DIRECTORY  +"Clients", "numero");
-		CommandDB Commands("Commands", DB_DIRECTORY  +"Commands", "numCommand");
-		LivraisonDB Livraisons("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");*/
+		Articles.init("Articles", DB_DIRECTORY  +"Articles", "ref");
+		Clients.init("Clients", DB_DIRECTORY  +"Clients", "numero");
+		Commands.init("Commands", DB_DIRECTORY  +"Commands", "numCommand");
+		Livraisons.init("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");
 	}
 	vector<Article> XL::getArticles() { 
 		return Articles.findAll().get<vector<Article>>();
@@ -24,19 +18,19 @@ using json = nlohmann::json;
 		return Articles.findIf(filter).get<vector<Article>>();
 	}
 	Client XL::getBestClient( const Article &article) {
-		std::map<int, int> results;
+		std::map<unsigned, unsigned> results;
 		json commandes = Commands.findBY("refArticle", article.ref() );
 		for( JSONIt it = commandes.begin(); it != commandes.end(); it++ ) {
-			results[(*it)["numClient"].get<int>()] += (*it)["quantite"].get<int>();
+			results[(*it)["numClient"].get<unsigned>()] += (*it)["quantite"].get<unsigned>();
 		} 
-		int max = std::max_element(results.begin(), results.end(), [] (const std::pair<int,int>& a, const std::pair<int,int>& b)->bool{ return a.second < b.second; } )->first;			
+		unsigned max = std::max_element(results.begin(), results.end(), [] (const std::pair<unsigned, unsigned>& a, const std::pair<unsigned,unsigned>& b)->bool{ return a.second < b.second; } )->first;			
 		return Clients.find(max).get<Client>();
 	}
 	float XL::capital() {
 		float capital = 0;
 		json articles = Articles.findAll();
 		for( JSONIt it = articles.begin(); it != articles.end(); it++ ) {
-			capital += ( (*it)["quantite"].get<int>() * ((*it)["prix"].get<float>()) );
+			capital += ( (*it)["quantite"].get<unsigned>() * ((*it)["prix"].get<float>()) );
 		}
 		return capital;	
 	}

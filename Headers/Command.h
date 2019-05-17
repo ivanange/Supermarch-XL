@@ -17,13 +17,13 @@ class Command {
 	Command(nlohmann::json info);
 	unsigned numCommand() const;
 	unsigned numClient() const;
-	void numClient(int numClient);
+	void numClient(unsigned numClient);
 	state etat() const;
 	void etat( state etat);
 	unsigned refArticle() const;
-	void refArticle(int refArticle);
+	void refArticle(unsigned refArticle);
 	unsigned quantite() const;
-	void quantite( int quantite);
+	void quantite( unsigned quantite);
 	void toJson(nlohmann::json &JSON) const;
 		
 	

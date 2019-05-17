@@ -15,11 +15,11 @@ class Livraison {
 	Livraison(nlohmann::json info);
 	unsigned ref() const;
 	unsigned numCommand() const;
-	void numCommand(int numCommand);
+	void numCommand(unsigned numCommand);
 	unsigned quantite() const;
-	void quantite( int quantite);
+	void quantite( unsigned quantite);
 	unsigned numClient() const;
-	void numClient(int numClient);
+	void numClient(unsigned numClient);
 	void toJson(nlohmann::json &JSON) const;
 
 		

@@ -7,32 +7,7 @@ using json = nlohmann::json;
 
 Database::Database(){}
 Database::Database(std::string nom, std::string fichier, std::string cle ) {
-	_nom = nom;
-	_fichier = fichier;
-	_cle = cle;
-	
-	
-	
-	if(_isEmpty()){ 
-		vector<json> v;
-		_JSON = {	{_nom, v },  {"index", 0} }; 
-	}
-	else {
-		std::ifstream flux(_fichier.c_str());
-		if(flux) {
-			flux>>_JSON;
-			flux.close();
-
-		}
-		else {
-			throw ("Cannot open file");
-		}
-	}
-	
-	std::ofstream stream(_fichier.c_str());
-	if( !(stream)) { throw ("Could not write to file");	} 
-	
-	
+	init( nom,  fichier,  cle);	
 }
 
 
@@ -51,7 +26,6 @@ JSONIt Database::findref(std::string key, unsigned value)  {
 
 
 nlohmann::json Database::find(unsigned id)  {
-	cout<<_JSON;
 	return *(findref(_cle, id));
 }
 
@@ -91,9 +65,9 @@ nlohmann::json Database::findIf( std::function<bool(nlohmann::json)>filter)  {
 }
 
 void Database::save() {
+	_stream.open(_fichier.c_str());
 	_stream<<_JSON;
 	_stream.close();
-	_stream.open(_fichier.c_str());
 }
 
 
@@ -106,6 +80,30 @@ bool Database::_isEmpty() const {
     return size==0 ? true : false;
 }
 
+void Database::init(std::string nom, std::string fichier, std::string cle ) {
+	_nom = nom;
+	_fichier = fichier;
+	_cle = cle;
+	
+	
+	
+	if(_isEmpty()){ 
+		vector<json> v;
+		_JSON = {	{_nom, v },  {"index", 0} }; 
+	}
+	else {
+		std::ifstream flux(_fichier.c_str());
+		if(flux) {
+			flux>>_JSON;
+			flux.close();
+
+		}
+		else {
+			throw ("Cannot open file");
+		}
+	}
+
+}
 
 
 

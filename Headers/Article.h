@@ -28,9 +28,9 @@ class Article {
 	float prix() const;
 	void prix( float prix);
 	unsigned quantite() const;
-	void quantite( int quantite);	
+	void quantite( unsigned quantite);	
 	unsigned seuil() const;
-	void seuil( int seuil);
+	void seuil( unsigned seuil);
 	std::vector<Client> getClients();
 	void toJson(nlohmann::json &JSON) const;
 	

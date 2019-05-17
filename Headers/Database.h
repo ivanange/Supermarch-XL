@@ -32,6 +32,7 @@ class Database {
 		nlohmann::json findAll() const;
 		nlohmann::json findIf( std::function<bool(nlohmann::json)>filter) ;
 		void save();
+		void init(std::string nom, std::string fichier, std::string cle );
 		
 	
 };

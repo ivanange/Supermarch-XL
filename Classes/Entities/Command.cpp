@@ -17,7 +17,7 @@ unsigned Command::numClient() const {
 	return _numClient; 
 }
 	
-void Command::numClient(int numClient) {
+void Command::numClient(unsigned numClient) {
 	_numClient = numClient;
 }
 	
@@ -34,7 +34,7 @@ unsigned Command::refArticle() const {
 	return _refArticle;
 }
 	
-void Command::refArticle(int refArticle) {
+void Command::refArticle(unsigned refArticle) {
 	_refArticle = refArticle;
 }
 
@@ -43,16 +43,16 @@ unsigned Command::quantite() const {
 	
 }
 	
-void Command::quantite( int quantite) {
+void Command::quantite( unsigned quantite) {
 	_quantite = quantite;
 }
 	
 void Command::_init(nlohmann::json info) {
 	try {
-	_numCommand  = (unsigned)info["numCommand"].get<int>();
-	_refArticle  = (unsigned)info["refArticle"].get<int>();
-	_numClient  = (unsigned)info["numClient"].get<int>();
-	_quantite  = (unsigned)info["quantite"].get<int>();
+	_numCommand  = (unsigned)info["numCommand"].get<unsigned>();
+	_refArticle  = (unsigned)info["refArticle"].get<unsigned>();
+	_numClient  = (unsigned)info["numClient"].get<unsigned>();
+	_quantite  = (unsigned)info["quantite"].get<unsigned>();
 	_etat = info["etat"].get<std::string>()=="livrer" ? livrer:en_cours;
 	}
 	catch(...) {

@@ -42,7 +42,7 @@ unsigned Article::quantite() const {
 	return _prix; 
 }
 
-void Article::quantite( int quantite) {
+void Article::quantite( unsigned quantite) {
 	_quantite = quantite;
 }
 	
@@ -50,7 +50,7 @@ unsigned Article::seuil() const {
 	return _seuil;
 }
 
-void Article::seuil( int seuil) {
+void Article::seuil( unsigned seuil) {
 	_seuil = seuil;
 }
 
@@ -76,9 +76,9 @@ void Article::toJson(nlohmann::json &JSON) const {
 
 void Article::_init(nlohmann::json info) {
 	try {
-	_ref  = (unsigned)info["ref"].get<int>() ;
-	_quantite  = (unsigned)info["quantite"].get<int>();
-	_seuil  = (unsigned)info["seuil"].get<int>();
+	_ref  = (unsigned)info["ref"].get<unsigned>() ;
+	_quantite  = (unsigned)info["quantite"].get<unsigned>();
+	_seuil  = (unsigned)info["seuil"].get<unsigned>();
 	_label  = info["label"].get<std::string>();
 	_prix = info["prix"].get<float>();
 	}
