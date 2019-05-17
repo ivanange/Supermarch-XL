@@ -55,7 +55,7 @@ void Livraison::_init(nlohmann::json info) {
 		_quantite  = (unsigned)info["quantite"].get<unsigned>();
 	}
 	catch(...) {
-		throw("Invalid property value");
+		throw("Invalid  or Missing  property  value for Livraison ");
 	}		
 }
 	

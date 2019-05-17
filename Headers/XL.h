@@ -18,13 +18,6 @@
 #include "Article.h"
 
 
-/*
-class Client;
-class Article;
-class Command;
-class Livraison;
-*/
-
 class XL {
 	
 	public:
@@ -33,25 +26,9 @@ class XL {
 	std::vector<Article> getArticles();
 	std::vector<Article> getCriticalArticles();
 	Client getBestClient( const Article &article);
+	Client getBestClient( unsigned ref);
 	float capital();
 	
-	/*
-	void saveClient(json info);
-	void saveArticle(json info);
-	void saveCommand(json info);
-	void saveLivraison(json info);
-	void updateClient(json info);
-	void updateArticle(json info);
-	void updateCommand(json info);
-	void updateLivraison(json info);
-	void removeClient(unsigned id);
-	void removeArticle(unsigned id);
-	void removeCommand(unsigned id);
-	void removeLivraison(unsigned id);
-	void findClient(unsigned id);
-	void findArticle(unsigned id);
-	void findCommand(unsigned id);
-	void findLivraison(unsigned id); */
 	
 	
 	ArticleDB Articles;

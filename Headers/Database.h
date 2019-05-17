@@ -26,6 +26,7 @@ class Database {
 		Database();
 		Database(std::string nom, std::string fichier, std::string cle );
 		nlohmann::json find(unsigned id) ;
+		nlohmann::json find(std::string id) ;
 		void update(unsigned id, nlohmann::json info );
 		nlohmann::json findBY(std::string key, std::string value) ;
 		nlohmann::json findBY(std::string key, unsigned value);

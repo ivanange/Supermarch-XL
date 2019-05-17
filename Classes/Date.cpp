@@ -14,18 +14,26 @@ using namespace std;
 	}
 	
 	void Date::addDateFromString( string date ) {
-        	unsigned day = stoi( date.substr (0, 2 ) );
-        	unsigned month = stoi( date.substr (3, 2 ));
-        	unsigned year = stoi( date.substr (6, 4 ));
+		try {
+        	unsigned day = stoi( date.substr (0, date.find("/") ) );
+        	date = date.substr(date.find("/") +1);
+        	unsigned month = stoi( date.substr (0, date.find("/") ));
+        	date = date.substr(date.find("/") +1);
+        	unsigned year = stoi( date.substr (0));
         	addDate(day, month, year);
+    	}
+    	catch(char const* const& err) {
+			throw err;
+		}
+    	catch(...){ throw("Date parse Error");		}
 	}	
         
 	void Date::addDate(unsigned day, unsigned month, unsigned year) {
     	
-    	if( !(year >= 1000 ) ) { throw("Invalid value for  Year");}
-    	if( !(month >= 1 && month <= 12) ) { throw("Invalid value for  Month");}
-    	if( !(day >= 1) ) {	throw("Invalid value for day"); }
-		if( ( day > 30 && find(_monthsWith30days.begin(), _monthsWith30days.end(), month) != _monthsWith30days.end() ) || (month == 2 && ( (day > 29) || (day == 29 && year%4 != 0) ) ) ){  throw("Invalid value for day"); }
+    	if( !(year >= 1000 ) ) { throw("Error in Date : Invalid value for  Year");}
+    	if( !(month >= 1 && month <= 12) ) { throw("Error in Date : Invalid value for  Month");}
+    	if( !(day >= 1) ) {	throw(" Error in Date :Invalid value for day"); }
+		if( ( day > 30 && find(_monthsWith30days.begin(), _monthsWith30days.end(), month) == _monthsWith30days.end() ) || (month == 2 && ( (day > 29) || (day == 29 && year%4 != 0) ) ) ){  throw(" Error in Date : Invalid value for day"); }
 		
         _day = day;
         _month = month;

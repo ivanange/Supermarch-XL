@@ -10,22 +10,30 @@ using json = nlohmann::json;
 		Commands.init("Commands", DB_DIRECTORY  +"Commands", "numCommand");
 		Livraisons.init("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");
 	}
+	
 	vector<Article> XL::getArticles() { 
 		return Articles.findAll().get<vector<Article>>();
 	}
+	
 	vector<Article> XL::getCriticalArticles() {
 		std::function<bool(json)> filter = [](const json object) -> bool {  return ( object["quantite"] <= object["seuil"] ); };
 		return Articles.findIf(filter).get<vector<Article>>();
 	}
+	
 	Client XL::getBestClient( const Article &article) {
+		return getBestClient( article.ref() );
+	}
+	
+	Client XL::getBestClient( unsigned ref)	{
 		std::map<unsigned, unsigned> results;
-		json commandes = Commands.findBY("refArticle", article.ref() );
+		json commandes = Commands.findBY("refArticle", ref );
 		for( JSONIt it = commandes.begin(); it != commandes.end(); it++ ) {
 			results[(*it)["numClient"].get<unsigned>()] += (*it)["quantite"].get<unsigned>();
 		} 
 		unsigned max = std::max_element(results.begin(), results.end(), [] (const std::pair<unsigned, unsigned>& a, const std::pair<unsigned,unsigned>& b)->bool{ return a.second < b.second; } )->first;			
 		return Clients.find(max).get<Client>();
 	}
+	
 	float XL::capital() {
 		float capital = 0;
 		json articles = Articles.findAll();
@@ -34,11 +42,4 @@ using json = nlohmann::json;
 		}
 		return capital;	
 	}
-	/*
-	void saveClient(json info);
-	void saveArticle(json info);
-	void saveCommand(json info);
-	void saveLivraison(json info);
-	
-	*/
 
