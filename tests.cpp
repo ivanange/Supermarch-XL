@@ -1,5 +1,6 @@
 #include "../json.hpp"
 #include<iostream>
+#include<fstream>
 #include<string>
 #include<map>
 
@@ -28,9 +29,13 @@ int main() {
 	dico["b"] = 2;
 	json dic;
 	dic["mondico"] =dico;
-	dic["mondico"].erase("a");
-	dic["mondico"].erase("b");
+	ofstream file("test.txt");
+	file<<dic;
+	//dic["mondico"].erase("a");
+	//dic["mondico"].erase("b");
 	cout<<(dic["mondico"].empty());
+	json::iterator jit = dic["mondico"].begin();
+	cout<<endl<<endl<<*jit<<endl<<endl;
 	cout<<dic<<endl;
 	testeur T;
 	cout<<T.f<<T.g;

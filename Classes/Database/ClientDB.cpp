@@ -17,12 +17,4 @@ void ClientDB::add(nlohmann::json info ) {
 	_JSON[_nom].push_back(client);
 	save();
 }
- 
-void ClientDB::remove(unsigned id) {
-	vector<Client> clients = _JSON[_nom].get<vector<Client>>();
-	for( ClientIt it = clients.begin(); it != clients.end(); it++ ) {
-		if( (*it).numero() == id ) { clients.erase(it); break;	}
-	}
-	_JSON[_nom] = clients;
-	save();
-}
+

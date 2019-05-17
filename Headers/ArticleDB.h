@@ -15,7 +15,6 @@ class ArticleDB : public Database {
 	ArticleDB();
 	ArticleDB(std::string nom, std::string fichier, std::string cle );
 	void add(nlohmann::json info );
-	void remove(unsigned id);
 	
 };
 

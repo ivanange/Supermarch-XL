@@ -16,11 +16,3 @@ void ArticleDB::add(nlohmann::json info ) {
 	save();
 }
 
-void ArticleDB::remove(unsigned id) {
-	vector<Article> articles = _JSON[_nom].get<vector<Article>>();
-	for( ArticleIt it = articles.begin(); it != articles.end(); it++ ) {
-		if( (*it).ref() == id ) { articles.erase(it); break;	}
-	}
-	_JSON[_nom] = articles;
-	save();
-}

@@ -14,7 +14,6 @@ class ClientDB : public Database {
 	ClientDB();
 	ClientDB(std::string nom, std::string fichier, std::string cle );
 	void add(nlohmann::json info );
-	void remove(unsigned id);
 };
 
 #endif

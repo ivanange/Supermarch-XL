@@ -15,11 +15,3 @@ void LivraisonDB::add(nlohmann::json info ) {
 	save();
 }
 
-void LivraisonDB::remove(unsigned id) {
-	vector<Livraison> livraisons = _JSON[_nom].get<vector<Livraison>>();
-	for( LivraisonIt it = livraisons.begin(); it != livraisons.end(); it++ ) {
-		if( (*it).ref() == id ) { livraisons.erase(it); break;	}
-	}
-	_JSON[_nom] = livraisons;
-	save();
-}

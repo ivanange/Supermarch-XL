@@ -52,15 +52,15 @@ int main() {
 		
 		
 	// Entity tests
-	Client client( marche.Clients.find(1), &marche.Articles, &marche.Commands );
-	Article article( marche.Articles.find(0), &marche.Clients, &marche.Commands ); 	
+	//Client client( marche.Clients.find(1), &marche.Articles, &marche.Commands );
+	//Article article( marche.Articles.find(0), &marche.Clients, &marche.Commands ); 	
 	
-	json clients = article.getClients();
-	json clientArticles = client.getArticles();
-	json ongoingCommands = client.getOngoingCommands();
+	//json clients = article.getClients();
+	//json clientArticles = client.getArticles();
+	//json ongoingCommands = client.getOngoingCommands();
 	
 	//vector<Command> 	vector<Article> vect = client.getArticles(); marche.Commands.findBY("numCommand", 1);
-	cout<<clientArticles<<endl<<endl<<ongoingCommands<<endl<<endl<<clients<<marche.getBestClient(article).prenom()<<endl<<marche.capital();
+	//cout<<clientArticles<<endl<<endl<<ongoingCommands<<endl<<endl<<clients<<marche.getBestClient(article).prenom()<<endl<<marche.capital();
 
 		
 		

@@ -3,6 +3,7 @@
 
 #include<string>
 #include<vector>
+#include<map>
 #include <functional>
 #include<fstream>
 
@@ -19,7 +20,6 @@ class Database {
 	private:
 		std::ofstream _stream;
 		JSONIt findref(std::string key, std::string value);
-		JSONIt findref(std::string key, unsigned value);
 		bool _isEmpty() const;
 
 	public:
@@ -28,12 +28,16 @@ class Database {
 		nlohmann::json find(unsigned id) ;
 		nlohmann::json find(std::string id) ;
 		void update(unsigned id, nlohmann::json info );
+		void update(std::string id, nlohmann::json info );
 		nlohmann::json findBY(std::string key, std::string value) ;
 		nlohmann::json findBY(std::string key, unsigned value);
 		nlohmann::json findAll() const;
 		nlohmann::json findIf( std::function<bool(nlohmann::json)>filter) ;
 		void save();
 		void init(std::string nom, std::string fichier, std::string cle );
+		nlohmann::json toVector( nlohmann::json jsonmap ) const;
+		void remove(unsigned id);
+		void remove(std::string id);
 		
 	
 };

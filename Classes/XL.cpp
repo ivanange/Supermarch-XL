@@ -4,12 +4,10 @@ using namespace std;
 using json = nlohmann::json;
  
 
-	XL::XL() {
-		Articles.init("Articles", DB_DIRECTORY  +"Articles", "ref");
-		Clients.init("Clients", DB_DIRECTORY  +"Clients", "numero");
-		Commands.init("Commands", DB_DIRECTORY  +"Commands", "numCommand");
-		Livraisons.init("Livraisons", DB_DIRECTORY  +"Livraisons", "ref");
-	}
+	XL::XL() :	Articles("Articles", DB_DIRECTORY  +"Articles", "ref"),
+				Clients("Clients", DB_DIRECTORY  +"Clients", "numero"),
+				Commands("Commands", DB_DIRECTORY  +"Commands", "numCommand"),
+				Livraisons("Livraisons", DB_DIRECTORY  +"Livraisons", "ref") {}
 	
 	vector<Article> XL::getArticles() { 
 		return Articles.findAll().get<vector<Article>>();

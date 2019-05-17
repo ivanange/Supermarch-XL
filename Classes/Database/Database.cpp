@@ -10,36 +10,48 @@ Database::Database(std::string nom, std::string fichier, std::string cle ) {
 }
 
 
-JSONIt Database::findref(std::string key, std::string value)  {
-	for( JSONIt it = _JSON[_nom].begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] == value) { return it; }
-	}	
-}
+void Database::init(std::string nom, std::string fichier, std::string cle ) {
+	_nom = nom;
+	_fichier = fichier;
+	_cle = cle;
 
-JSONIt Database::findref(std::string key, unsigned value)  {
-	for( JSONIt it = _JSON[_nom].begin(); it!=_JSON[_nom].end(); it++ ) {
-		if( (*it)[key] == value) { return it; }
-	}	
-}
+	if(_isEmpty()){ json _JSON; _JSON["index"]=0; } 
+	else {
+		std::ifstream flux(_fichier.c_str());
+		if(flux) {	flux>>_JSON;	}
+		else {	throw ("Cannot open file");	}
+	}
 
+}
 
 
 nlohmann::json Database::find(unsigned id)  {
-	return *(findref(_cle, id));
+	return find(to_string(id));
 }
 
 nlohmann::json Database::find(std::string id)  {
-	return *(findref(_cle, stoi(id) ));
+	return _JSON[_nom][id];
 }
 
-void Database::update(unsigned id, nlohmann::json info ) {
-	JSONIt target = findref(_cle, id);
-
+void Database::update(std::string id, nlohmann::json info ) {
 	for( JSONIt it = info.begin(); it != info.end(); it++ ) {
-		(*target)[it.key()] = it.value();
+		_JSON[_nom][id][it.key()] = it.value();
 	}
 	save();	
 }
+
+void Database::update( unsigned id, nlohmann::json info ) {
+	update(to_string(id), info);
+}
+
+void Database::remove(std::string id) {
+	_JSON[_nom].erase(id);
+}
+
+void Database::remove(unsigned id) {
+	remove(to_string(id));
+}
+
 
 nlohmann::json Database::findBY(std::string key, std::string value)  {
 	json result;
@@ -57,8 +69,10 @@ nlohmann::json Database::findBY(std::string key, unsigned value)  {
 	return result;	
 }
 
+
+
 nlohmann::json Database::findAll() const {
-	return _JSON[_nom];
+	return toVector(_JSON[_nom]);
 }
 
 nlohmann::json Database::findIf( std::function<bool(nlohmann::json)>filter)  {
@@ -68,6 +82,7 @@ nlohmann::json Database::findIf( std::function<bool(nlohmann::json)>filter)  {
 	}
 	return result;
 }
+
 
 void Database::save() {
 	_stream.open(_fichier.c_str());
@@ -85,29 +100,17 @@ bool Database::_isEmpty() const {
     return size==0 ? true : false;
 }
 
-void Database::init(std::string nom, std::string fichier, std::string cle ) {
-	_nom = nom;
-	_fichier = fichier;
-	_cle = cle;
-	
-	
-	
-	if(_isEmpty()){ 
-		vector<json> v;
-		_JSON = {	{_nom, v },  {"index", 0} }; 
-	}
-	else {
-		std::ifstream flux(_fichier.c_str());
-		if(flux) {
-			flux>>_JSON;
-			flux.close();
-
-		}
-		else {
-			throw ("Cannot open file");
-		}
-	}
-
+nlohmann::json Database::toVector( nlohmann::json jsonmap ) const{
+	std::vector<json> values;
+	map<string, json> jmap = jsonmap.get<map<string, json>>();
+	std::transform(
+    	jmap.begin(),
+    	jmap.end(),
+    	std::back_inserter(values),
+    	[](const std::pair<string, json> cell ){return cell.second;});
+    	
+    json result = values;
+    return result;
 }
 
 

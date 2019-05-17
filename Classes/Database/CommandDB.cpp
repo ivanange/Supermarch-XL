@@ -15,11 +15,3 @@ void CommandDB::add(nlohmann::json info ) {
 	save();
 }
 
-void CommandDB::remove(unsigned id) {
-	vector<Command> commandes = _JSON[_nom].get<vector<Command>>();
-	for( CommandIt it = commandes.begin(); it != commandes.end(); it++ ) {
-		if( (*it).numCommand() == id ) { commandes.erase(it); break;	}
-	}
-	_JSON[_nom] = commandes;
-	save();
-}
