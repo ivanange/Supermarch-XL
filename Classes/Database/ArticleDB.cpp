@@ -9,10 +9,11 @@ ArticleDB::ArticleDB(std::string nom, std::string fichier, std::string cle ) : D
 }
 
 void ArticleDB::add(nlohmann::json info ) {
+	string id = to_string(_JSON["index"].get<unsigned>() );
 	info["ref"] = _JSON["index"].get<unsigned>();
 	_JSON["index"] = _JSON["index"].get<unsigned>() +1;
 	Article articles = Article(info);
-	_JSON[_nom].push_back(articles);
+	_JSON[_nom][id] = articles;
 	save();
 }
 

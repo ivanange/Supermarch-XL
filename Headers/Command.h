@@ -25,6 +25,8 @@ class Command {
 	unsigned quantite() const;
 	void quantite( unsigned quantite);
 	void toJson(nlohmann::json &JSON) const;
+	state etats( std::string etat ) const;
+	std::string etats( state etat ) const;
 		
 	
 	private:

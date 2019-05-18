@@ -15,7 +15,7 @@ void Database::init(std::string nom, std::string fichier, std::string cle ) {
 	_fichier = fichier;
 	_cle = cle;
 
-	if(_isEmpty()){ json _JSON; _JSON["index"]=0; } 
+	if(_isEmpty()){ _JSON["index"]=0; } 
 	else {
 		std::ifstream flux(_fichier.c_str());
 		if(flux) {	flux>>_JSON;	}
@@ -46,10 +46,12 @@ void Database::update( unsigned id, nlohmann::json info ) {
 
 void Database::remove(std::string id) {
 	_JSON[_nom].erase(id);
+	save();
 }
 
 void Database::remove(unsigned id) {
 	remove(to_string(id));
+	save();
 }
 
 

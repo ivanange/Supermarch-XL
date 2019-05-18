@@ -4,6 +4,7 @@
 #include<string>
 #include<vector>
 #include <functional>
+#include <algorithm>
 
 
 #include "Date.h"
@@ -18,7 +19,7 @@ class Article;
 
 
 
-enum gender { F, M};
+enum  gender { F, M};
 
 class Client {
 	
@@ -39,6 +40,8 @@ class Client {
 	std::vector<Article> getArticles();
 	std::vector<Command> getOngoingCommands();
 	void toJson(nlohmann::json &JSON) const;
+	std::string genres( gender g ) const;
+	gender genres( std::string g ) const;
 	
 	
 	private:

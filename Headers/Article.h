@@ -4,6 +4,7 @@
 #include<string>
 #include<vector>
 #include <functional>
+#include <algorithm>
 
 #include "json.hpp"
 #include "utility.h"

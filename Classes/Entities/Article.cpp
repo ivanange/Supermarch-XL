@@ -57,9 +57,15 @@ void Article::seuil( unsigned seuil) {
 vector<Client> Article::getClients() {
 	
 	vector<Client> clients;
+	vector<unsigned> refs;
+	
 	json result = _commandes->findBY("refArticle", _ref);
 	for( JSONIt it = result.begin(); it!= result.end(); it++ ) {
-		clients.push_back( _clients->find( (unsigned)(*it)["numClient"]).get<Client>() );
+		unsigned ref = (*it)["numClient"] ;
+		if( find(refs.begin(), refs.end(), ref ) == refs.end() ) {
+			refs.push_back(ref);
+			clients.push_back( _clients->find( ref ).get<Client>() );
+		}
 	}
 	return clients;
 	

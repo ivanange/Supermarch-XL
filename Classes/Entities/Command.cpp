@@ -53,7 +53,7 @@ void Command::_init(nlohmann::json info) {
 	_refArticle  = (unsigned)info["refArticle"].get<unsigned>();
 	_numClient  = (unsigned)info["numClient"].get<unsigned>();
 	_quantite  = (unsigned)info["quantite"].get<unsigned>();
-	_etat = (info["etat"].get<std::string>() == "livrer" )? livrer:en_cours;
+	_etat = etats(info["etat"].get<std::string>());
 	}
 	catch(...) {
 		throw("Invalid  or Missing  property  value for Command");
@@ -61,12 +61,20 @@ void Command::_init(nlohmann::json info) {
 	
 }
 
+state Command::etats( string etat ) const {
+	return etat == "livrer" ? livrer : ( etat == "en cours" ? en_cours : throw("Delivery state unrecognized") ) ;
+}
+
+string Command::etats( state etat ) const {
+	return etat == livrer ? "livrer" : ( etat == en_cours ? "en cours" : throw("Delivery state unrecognized") ) ;
+}
+
 void Command::toJson(nlohmann::json &JSON) const {
 	JSON = { {"numCommand", _numCommand},
 	{"numClient", _numClient},
 	{"refArticle", _refArticle},
 	{"quantite", _quantite },
-	{"etat", _etat==livrer ? "livrer": "en cours" } };
+	{"etat", etats(_etat) } };
 	
 }
 
@@ -78,6 +86,11 @@ void from_json(const json &j, Command &commande) {
 	commande = Command(j);
 }
 
-	
-	
+state etat( string etat ) {
+	return etat == "livrer" ? livrer : ( etat == "en cours" ? en_cours : throw("Delivery state unrecognized") ) ;
+}
+
+string etat( state etat ) {
+	return etat == livrer ? "livrer" : ( etat == en_cours ? "en cours" : throw("Delivery state unrecognized") ) ;
+}	
 	
