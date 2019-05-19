@@ -8,12 +8,15 @@
 #include "json.hpp"
 #include "utility.h"
 
+class Livraison;
+
 
 class LivraisonDB : public Database{
 	public:
 	LivraisonDB();
 	LivraisonDB(std::string nom, std::string fichier, std::string cle );
 	void add(nlohmann::json info );
+	void add(const Livraison &livraison );
 	
 };
 

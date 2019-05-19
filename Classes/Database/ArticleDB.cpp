@@ -17,3 +17,8 @@ void ArticleDB::add(nlohmann::json info ) {
 	save();
 }
 
+void ArticleDB::add(const Article &article ) {
+	json jarticle = article;
+	ArticleDB::add(jarticle);
+}
+

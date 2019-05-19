@@ -16,3 +16,7 @@ void CommandDB::add(nlohmann::json info ) {
 	save();
 }
 
+void CommandDB::add(const Command &command ) {
+	json jcommand = command;
+	add(jcommand);
+}

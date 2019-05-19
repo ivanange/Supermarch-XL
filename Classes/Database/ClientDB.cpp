@@ -19,3 +19,8 @@ void ClientDB::add(nlohmann::json info ) {
 	save();
 }
 
+void ClientDB::add(const Client &client ) {
+	json jclient = client;
+	add(jclient);
+}
+

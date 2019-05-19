@@ -16,3 +16,8 @@ void LivraisonDB::add(nlohmann::json info ) {
 	save();
 }
 
+void LivraisonDB::add(const Livraison &livraison ) {
+	json jlivraison = livraison;
+	add(jlivraison);
+}
+

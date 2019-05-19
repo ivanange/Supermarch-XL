@@ -60,6 +60,8 @@ int main() {
 	json clientArticles = client.getArticles();
 	json ongoingCommands = client.getOngoingCommands();
 	
+	marche.Articles.add(article);
+	
 	//vector<Command> 	vector<Article> vect = client.getArticles(); marche.Commands.findBY("numCommand", 1);
 	cout<<clientArticles<<endl<<endl<<ongoingCommands<<endl<<endl<<clients<<endl<<marche.getBestClient(article).prenom()<<endl<<marche.capital();
 
