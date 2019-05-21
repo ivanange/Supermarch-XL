@@ -37,7 +37,7 @@ class Database {
 		void init(std::string nom, std::string fichier, std::string cle );
 		nlohmann::json toVector( nlohmann::json jsonmap ) const;
 		void remove(unsigned id);
-		void remove(std::string id);
+		void remove(std::string id); 
 		
 	
 };
